@@ -298,6 +298,16 @@
       var menu = document.getElementById("sideMenu");
       menu.style.width = '0';
     }
+
+      // Close the menu if clicking outside of it
+  document.addEventListener('click', function(event) {
+    var menu = document.getElementById("sideMenu");
+    var menuIcon = document.getElementById("menu-icon");
+
+    if (!menu.contains(event.target) && !menuIcon.contains(event.target)) {
+      closeMenu();
+    }
+  });
   </script>
 </body>
 
