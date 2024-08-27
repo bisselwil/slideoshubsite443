@@ -4,9 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Browse - Slide OS Hub</title>
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-
+  <title>Slide OS Hub</title>
   <style>
     body {
       font-family: 'Arial', sans-serif;
@@ -103,14 +101,24 @@
       cursor: pointer;
     }
 
-    #search-bar {
-      display: flex;
-      align-items: center;
-      background: transparent;
-      border: none;
-      outline: none;
-      color: #fff;
-    }
+    #clearSearch {
+  border: none;
+  background: none;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  display: none;
+  padding: 0 10px;
+}
+
+#search-bar {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+}
 
     #search-bar input {
       border: none;
@@ -256,6 +264,7 @@
     <div id="search-bar">
       <img src="search.png" alt="Search" width="20" height="20">
       <input type="text" id="searchInput" onkeyup="searchOS()" placeholder="Search for OSes...">
+      <button id="clearSearch" onclick="clearSearchInput()" style="display:none;">&times;</button>
     </div>
     <span id="logo">
       <a href="index.html">
@@ -305,6 +314,30 @@
   
 
   <script>
+
+
+
+document.getElementById('searchInput').addEventListener('input', function() {
+  var clearBtn = document.getElementById('clearSearch');
+  if (this.value.length > 0) {
+    clearBtn.style.display = 'block';
+  } else {
+    clearBtn.style.display = 'none';
+  }
+});
+
+function clearSearchInput() {
+  var input = document.getElementById('searchInput');
+  input.value = '';
+  input.dispatchEvent(new Event('input')); // Trigger input event to update UI
+  input.focus(); // Optionally set focus back to input
+}
+
+
+
+
+
+
     document.getElementById('menu-icon').addEventListener('click', function() {
       var menuItems = document.getElementById('menu-items');
       menuItems.style.display = (menuItems.style.display === 'block') ? 'none' : 'block';
@@ -321,21 +354,30 @@
     }
 
     function searchOS() {
-      var input, filter, productGrid, productItems, i, txtValue;
-      input = document.getElementById('searchInput');
-      filter = input.value.toLowerCase();
-      productGrid = document.getElementById("productGrid");
-      productItems = productGrid.getElementsByClassName('product-item');
+  var input, filter, productGrid, productItems, i, txtValue;
+  input = document.getElementById('searchInput');
+  filter = input.value.toLowerCase();
+  productGrid = document.getElementById("productGrid");
+  productItems = productGrid.getElementsByClassName('product-item');
 
-      for (i = 0; i < productItems.length; i++) {
-        txtValue = productItems[i].getAttribute('data-title').toLowerCase();
-        if (txtValue.indexOf(filter) > -1) {
-          productItems[i].style.display = "";
-        } else {
-          productItems[i].style.display = "none";
-        }
-      }
+  for (i = 0; i < productItems.length; i++) {
+    txtValue = productItems[i].getAttribute('data-title').toLowerCase();
+    if (filter === '' || txtValue.indexOf(filter) > -1) {
+      productItems[i].style.display = ""; // Show the item
+    } else {
+      productItems[i].style.display = "none"; // Hide the item
     }
+  }
+}
+
+function clearSearchInput() {
+  var input = document.getElementById('searchInput');
+  input.value = ''; // Clear the input
+  input.dispatchEvent(new Event('input')); // Trigger input event to update UI
+  searchOS(); // Call searchOS to reset all items' visibility
+  input.focus(); // Optionally set focus back to input
+}
+
   </script>
 </body>
 
