@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sixth Street Shoes</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav {
+      background-color: #333;
+      color: #fff;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: center; /* Center content horizontally */
+      align-items: center;
+    }
+
+    body::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 50vh;
+      background: linear-gradient(transparent, white);
+      z-index: 1;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #fff;
+      margin: 0 15px;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      border-bottom: 2px solid #fff;
+    }
+
+
+#menuButton {
+  /* Add your desired styling for the menu button here */
+  cursor: pointer;
+  /* other styles */
+}
+
+/* Side menu styling */
+.side-nav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: white;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 12px 16px;
+  font-size: 30px;
+  border: none;
+  background: none;
+}
+
+/* Additional style to make sure the close button has a cursor pointer */
+.close-btn:hover {
+  cursor: pointer;
+  color: #aaa; /* Change color on hover if you want */
+}
+
+/* Menu button styles */
+.menu-btn {
+  padding: 10px 15px;
+  text-decoration: none;
+  font-size: 25px;
+  color: black;
+  display: block;
+  transition: 0.3s;
+  border: none;
+  background: none;
+  text-align: left;
+}
+
+.menu-btn:hover {
+  color: #d4a41f;
+}
+
+
+
+
+    #logo {
+      font-size: 1.5em;
+      font-weight: bold;
+      text-align: center; /* Center content horizontally */
+      flex-grow: 1;
+    }
+
+    #menu-icon {
+      font-size: 1.5em;
+      cursor: pointer;
+    }
+
+    #search-bar {
+      display: flex;
+      align-items: center;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #fff;
+      margin-right: 15px;
+    }
+#search {
+  transition: transform 0.5s;
+}
+
+/* Menu button styling for transition */
+#menuButton {
+  transition: transform 0.5s;
+}
+
+/* You may need to adjust the values in the transform translateX property
+   depending on the width of your menu and the desired final position. */
+.menu-open #menuButton,
+.menu-open #searchBox {
+  transform: translateX(250px); /* Adjust this value if needed */
+}
+    #search-bar input {
+      border: none;
+      outline: none;
+      background: transparent;
+      color: #fff;
+      padding: 5px;
+    }
+
+    #menu-items {
+      display: none;
+      width: 100%;
+      background-color: #333;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      z-index: 1;
+    }
+
+    .content {
+      position: relative;
+      margin: 0 auto;
+      width: 90%;
+      max-width: 800px;
+      padding: 0px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      z-index: 2;
+      text-align: center; /* Center content horizontally */
+      margin-top: 20vh; /* Adjust as needed */
+    }
+
+    .content h1 {
+      font-size: 36px;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    section {
+      background-color: #FFF;
+      margin: 0 auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    section button {
+      display: inline-block;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #333;
+      color: #fff;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+    }
+
+    hvr {
+      background-color: #FFF;
+      color: #333;
+    }
+
+    .content button {
+      display: inline-block;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #333;
+      color: #fff;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.5s ease-in-out;
+    }
+
+    .content button:hover {
+      background-color: #d4a41f;
+      color: #333
+    }
+
+    .content {
+      width: 90%;
+      padding: 10px;
+    }
+
+    #menu-items a {
+      display: block;
+      padding: 15px;
+      text-align: center;
+    }
+
+    @media screen and (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      #menu-icon {
+        display: block;
+      }
+
+      #search-bar {
+        margin-right: 0;
+        margin-top: 10px;
+      }
+
+      #menu-items {
+        display: block;
+        position: static;
+      }
+    }
+
+    /* Add styles for the bottom navigation bar */
+    #bottom-nav {
+      background-color: #333;
+      color: #fff;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+
+      z-index: 2;
+    }
+
+    #bottom-nav a {
+      text-decoration: none;
+      color: #fff;
+      margin: 0 15px;
+      font-weight: bold;
+    }
+
+    #bottom-nav span {
+      flex-grow: 1000000000000;
+      text-align: center;
+      color: #fff;
+      margin: 0 15px;
+      font-weight: bold;
+    }
+
+    #bottom-nav div {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      flex-grow: 1;
+    }
+
+    #bottom-nav div a {
+      text-decoration: none;
+      color: #fff;
+      margin: 0 15px;
+      font-weight: bold;
+    }
+
+    #bottom-nav a:hover {
+      border-bottom: 2px solid #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <a href="#" id="menu-icon"><img src="menu.png" onclick="toggleMenu()" width=20 height=20></a>
+    <div id="search-bar">
+      <img src="search.png" alt="Search" width="20" height="20">
+      <input type="text" placeholder="Search">
+    </div>
+    <span id="logo">
+	
+      <img src="logo.png" width="200px">
+      
+      </span>
+    <a href="#"><img src="wishlist.png" alt="Wishlist" width="20" height="20"></a>
+    <a href="#"><img src="contact.png" alt="Contact" width="25" height="20"></a>
+    <a href="#"><img src="account.png" alt="Account" width="20" height="20"></a>
+    <a href="#"><img src="cart.png" alt="Cart" width="20" height="20"></a>
+  </nav>
+
+
+
+
+
+<div id="sideMenu" class="side-nav">
+<button onclick="closeMenu()" class="close-btn">&times;</button>
+    <button class="menu-btn">Home</button>
+    <button class="menu-btn">Collection</button>
+    <button class="menu-btn">New Arrivals</button>
+    <button class="menu-btn">Contact</button>
+</div>
+
+
+
+  <div id="menu-items">
+    <!-- ... Your existing menu items ... -->
+  </div>
+
+
+  <script>
+    document.getElementById('menu-icon').addEventListener('click', function() {
+      var menuItems = document.getElementById('menu-items');
+      menuItems.style.display = (menuItems.style.display === 'block') ? 'none' : 'block';
+    });
+	
+	
+	
+	function toggleMenu() {
+  var menu = document.getElementById("sideMenu");
+  menu.style.width = menu.style.width === '250px' ? '0' : '250px';
+}
+
+function closeMenu() {
+  var menu = document.getElementById("sideMenu");
+  menu.style.width = '0';
+}
+  </script>
+</body>
+
+</html>

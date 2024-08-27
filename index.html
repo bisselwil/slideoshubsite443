@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to the Slide OS Hub</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: url('banner.png') center center fixed;
+      background-size: cover;
+    }
+
+    nav {
+      background-color: #333;
+      color: #fff;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    body::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 50vh;
+      background: linear-gradient(transparent, white);
+      z-index: 1;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #fff;
+      margin: 0 15px;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      border-bottom: 2px solid #fff;
+    }
+
+    #menuButton {
+      cursor: pointer;
+    }
+
+    .side-nav {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 100;
+      top: 0;
+      left: 0;
+      background-color: white;
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 60px;
+      border: 2px solid #333; /* Border color */
+      border-radius: 10px; /* Rounded corners */
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 12px 16px;
+      font-size: 30px;
+      border: none;
+      background: none;
+    }
+
+    .close-btn:hover {
+      cursor: pointer;
+      color: #aaa;
+    }
+
+    .menu-btn {
+      padding: 10px 15px;
+      text-decoration: none !important;
+      font-size: 25px;
+      color: black;
+      display: block;
+      transition: 0.3s;
+      border: none;
+      background: none;
+      text-align: left;
+    }
+
+    .menu-btn:hover {
+      color: #d4a41f;
+    }
+
+
+    .side-nav a {
+  text-decoration: none; /* Ensure all links in side menu have no underline */
+}
+
+    #logo {
+      font-size: 0.5em;
+      font-weight: bold;
+      text-align: center;
+      flex-grow: 1;
+      width: 20%;
+    }
+
+    #menu-icon {
+      font-size: 1.5em;
+      cursor: pointer;
+    }
+
+    #search-bar {
+      display: flex;
+      align-items: center;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #fff;
+      margin-right: 15px;
+    }
+
+    #search-bar input {
+      border: none;
+      outline: none;
+      background: transparent;
+      color: #fff;
+      padding: 5px;
+    }
+
+    #menu-items {
+      display: none;
+      width: 100%;
+      background-color: #333;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      z-index: 1;
+    }
+
+    .content {
+      position: relative;
+      margin: 0 auto;
+      width: 90%;
+      max-width: 800px;
+      padding: 0px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      z-index: 2;
+      text-align: center;
+      margin-top: 20vh;
+    }
+
+    .content h1 {
+      font-size: 36px;
+      color: #ffffff;
+      margin-bottom: 20px;
+    }
+
+    section {
+      background-color: #FFF;
+      margin: 0 auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .content button {
+      display: inline-block;
+      padding: 20px 40px; /* Increased padding for a bigger button */
+      font-size: 24px; /* Increased font size */
+      border: none;
+      border-radius: 10px; /* Rounded corners */
+      background-color: #333;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.5s ease-in-out;
+    }
+
+    .content button:hover {
+      background-color: #d4a41f;
+      color: #333;
+      transform: scale(1.05); /* Slightly enlarge the button on hover */
+    }
+
+    p {
+      color: white;
+    }
+
+    .content {
+      width: 90%;
+      padding: 10px;
+    }
+
+    #menu-items a {
+      display: block;
+      padding: 15px;
+      text-align: center;
+    }
+
+    @media screen and (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      #menu-icon {
+        display: block;
+      }
+
+      #search-bar {
+        margin-right: 0;
+        margin-top: 10px;
+      }
+
+      #menu-items {
+        display: block;
+        position: static;
+      }
+    }
+
+    #bottom-nav {
+      background-color: #333;
+      color: #fff;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      z-index: 2;
+    }
+
+    #bottom-nav a {
+      text-decoration: none;
+      color: #fff;
+      margin: 0 15px;
+      font-weight: bold;
+    }
+
+    #bottom-nav span {
+      flex-grow: 1000000000000;
+      text-align: center;
+      color: #fff;
+      margin: 0 15px;
+      font-weight: bold;
+    }
+
+    #bottom-nav div {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      flex-grow: 1;
+    }
+
+    #bottom-nav div a {
+      text-decoration: none;
+      color: #fff;
+      margin: 0 15px;
+      font-weight: bold;
+    }
+
+    #bottom-nav a:hover {
+      border-bottom: 2px solid #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <a href="#" id="menu-icon"><img src="menu.png" onclick="toggleMenu()" width=20 height=20></a>
+    
+    <span id="logo">
+      <img src="logo.png" width="100px">
+    </span>
+    
+    <a href="contact.html"><img src="contact.png" alt="Contact" width="25" height="20"></a>
+   
+  </nav>
+
+  <div id="sideMenu" class="side-nav">
+    <button onclick="closeMenu()" class="close-btn">&times;</button>
+    <a href="index.html">
+      <button class="menu-btn">Home</button>
+    </a>
+    <a href="browse.html">
+      <button class="menu-btn">Browse OSes</button>
+    </a>
+    <a href="contact.html">
+      <button class="menu-btn">Contact/Get Featured</button>
+    </a>
+  </div>
+
+  <div class="content">
+    <br>
+    <br>
+    <br>
+    <br>
+    <h1>Welcome to the Slide OS Hub</h1>
+    <p>Welcome to the Slide OS Hub!<br> Explore a variety of unique operating systems created using Differnt slideshow Apps (Mostly Google Slides). <br> Slide OSes are interactive and enjoyable, often made just for fun, though They're not fully functional or practical.</p>
+    <a id="hvr" href="browse.html">
+      <button class="hvr">Browse OSes</button>
+    </a>
+  </div>
+
+  <div id="bottom-nav">
+    <a href="faq.html">F.A.Q</a>
+    <span id="copyright">© 2023-24 Slide OS Hub</span>
+    <div>
+      <a href="https://mixerdude.com">mixerdude.com</a>
+      <a href="https://wilsoncissel.com">wilsoncissel.com            .</a>
+      
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('menu-icon').addEventListener('click', function() {
+      var menuItems = document.getElementById('menu-items');
+      menuItems.style.display = (menuItems.style.display === 'block') ? 'none' : 'block';
+    });
+  
+    function toggleMenu() {
+      var menu = document.getElementById("sideMenu");
+      menu.style.width = menu.style.width === '250px' ? '0' : '250px';
+    }
+
+    function closeMenu() {
+      var menu = document.getElementById("sideMenu");
+      menu.style.width = '0';
+    }
+  </script>
+</body>
+
+</html>

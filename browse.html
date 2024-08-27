@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide OS Hub</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      padding-top: 60px;
+    }
+
+    nav {
+      background-color: #333;
+      color: #fff;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #fff;
+      margin: 0 15px;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      border-bottom: 2px solid #fff;
+    }
+
+    #menuButton {
+      cursor: default !important;
+    }
+
+    .side-nav {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 1000;
+      top: 0;
+      left: 0;
+      background-color: white;
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 60px;
+      border: 2px solid #333;
+      border-radius: 10px;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 12px 16px;
+      font-size: 30px;
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
+
+    .close-btn:hover {
+      color: #aaa;
+    }
+
+    .menu-btn {
+      padding: 10px 15px;
+      font-size: 25px;
+      color: black;
+      display: block;
+      transition: 0.3s;
+      border: none;
+      background: none;
+      text-align: left;
+      text-decoration: none;
+      
+    }
+
+    .menu-btn:hover {
+      color: #d4a41f;
+      cursor: default !important;
+    }
+
+    #logo {
+      font-size: 1.5em;
+      font-weight: bold;
+      text-align: center;
+      flex-grow: 1;
+    }
+
+    #menu-icon {
+      font-size: 1.5em;
+      cursor: pointer;
+    }
+
+    #search-bar {
+      display: flex;
+      align-items: center;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #fff;
+    }
+
+    #search-bar input {
+      border: none;
+      outline: none;
+      background: transparent;
+      color: #fff;
+      padding: 5px;
+    }
+
+    .content {
+      position: relative;
+      margin: 0 auto;
+      width: 90%;
+      max-width: 800px;
+      padding: 0px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      z-index: 2;
+      text-align: center;
+      margin-top: 20vh;
+    }
+
+    .content h1 {
+      font-size: 36px;
+      color: #333;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      padding: 10px;
+      margin: 0 auto;
+    }
+
+    .product-item {
+      background: white;
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .product-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .product-item a {
+      text-decoration: none;
+      color: #333;
+    }
+
+    .product-item img {
+      width: 100%;
+      height: auto;
+      border-radius: 5px;
+    }
+
+    .product-item h2 {
+      margin-top: 10px;
+    }
+
+    .product-item p {
+      margin-top: 5px;
+      font-weight: bold;
+      color: #e44d26;
+    }
+
+    @media (max-width: 1200px) {
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    #bottom-nav {
+      background-color: #333;
+      color: #fff;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      z-index: 2;
+    }
+
+    #bottom-nav a {
+      text-decoration: none;
+      color: #fff;
+      margin: 0 15px;
+      font-weight: bold;
+    }
+
+    #bottom-nav span {
+      flex-grow: 1000000000000;
+      text-align: center;
+      color: #fff;
+      margin: 0 15px;
+      font-weight: bold;
+    }
+
+    #bottom-nav div {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      flex-grow: 1;
+    }
+
+    #bottom-nav div a {
+      text-decoration: none;
+      color: #fff;
+      margin: 0 15px;
+      font-weight: bold;
+    }
+
+    #bottom-nav a:hover {
+      border-bottom: 2px solid #fff;
+    }
+
+    /* Fix for Mailbox Icon */
+    #mailbox-icon {
+      margin-right: 15px;
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <a href="#" id="menu-icon"><img src="menu.png" onclick="toggleMenu()" width=20 height=20></a>
+    <div id="search-bar">
+      <img src="search.png" alt="Search" width="20" height="20">
+      <input type="text" id="searchInput" onkeyup="searchOS()" placeholder="Search for OSes...">
+    </div>
+    <span id="logo">
+      <a href="index.html">
+        <img src="logo.png" width="100px">
+      </a>
+    </span>
+    <div id="mailbox-icon">
+      <a href="contact.html"><img src="contact.png" alt="Contact" width="25" height="20"></a>
+    </div>
+  </nav>
+
+  <div id="sideMenu" class="side-nav">
+    <button onclick="closeMenu()" class="close-btn">&times;</button>
+    <a href="index.html" class="menu-btn">Home</a>
+    <a href="browse.html" class="menu-btn">Browse OSes</a>
+    <a href="contact.html" class="menu-btn">Contact</a>
+  </div>
+
+  <main>
+    <section class="product-listing">
+      <h1>Community Made OSes</h1><br><br> <!-- Original centered title with spacing -->
+      <div class="product-grid" id="productGrid">
+        <!-- Product 1 -->
+        <article class="product-item" data-title="Wilo OS">
+          <a href="wilo.html">
+            <img src="banner.png" alt="Wilo OS" width="200px">
+            <h2>Wilo OS</h2>
+            <p>Mixer Dude</p>
+          </a>
+        </article>
+
+        
+        <!-- Add more products here -->
+        <!-- Example:
+        <article class="product-item" data-title="Another OS">
+          <a href="another-os.html">
+            <img src="another-os.png" alt="Another OS" width="200px">
+            <h2>Another OS</h2>
+            <p>Developer Name</p>
+          </a>
+        </article>
+        -->
+      </div>
+    </section>
+  </main>
+
+  
+
+  <script>
+    document.getElementById('menu-icon').addEventListener('click', function() {
+      var menuItems = document.getElementById('menu-items');
+      menuItems.style.display = (menuItems.style.display === 'block') ? 'none' : 'block';
+    });
+
+    function toggleMenu() {
+      var menu = document.getElementById("sideMenu");
+      menu.style.width = menu.style.width === '250px' ? '0' : '250px';
+    }
+
+    function closeMenu() {
+      var menu = document.getElementById("sideMenu");
+      menu.style.width = '0';
+    }
+
+    function searchOS() {
+      var input, filter, productGrid, productItems, i, txtValue;
+      input = document.getElementById('searchInput');
+      filter = input.value.toLowerCase();
+      productGrid = document.getElementById("productGrid");
+      productItems = productGrid.getElementsByClassName('product-item');
+
+      for (i = 0; i < productItems.length; i++) {
+        txtValue = productItems[i].getAttribute('data-title').toLowerCase();
+        if (txtValue.indexOf(filter) > -1) {
+          productItems[i].style.display = "";
+        } else {
+          productItems[i].style.display = "none";
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>
