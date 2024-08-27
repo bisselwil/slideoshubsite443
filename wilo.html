@@ -5,8 +5,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Wilo OS - Slide OS Hub</title>
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-
   <style>
     body {
       font-family: 'Arial', sans-serif;
@@ -74,7 +72,7 @@
       color: #fff;
       padding: 10px 20px;
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
     }
 
@@ -94,19 +92,19 @@
     }
 
     .side-nav {
-  height: 100%;
-  width: 0;
-  position: fixed;
-  z-index: 1000;
-  top: 0;
-  left: 0;
-  background-color: white;
-  overflow-x: hidden;
-  transition: 0.5s;
-  padding-top: 60px;
-  border: 2px solid #333; /* Add border color here */
-  border-radius: 10px; /* Optional: add rounded corners */
-}
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 1000;
+      top: 0;
+      left: 0;
+      background-color: white;
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 60px;
+      border: 2px solid #333; /* Add border color here */
+      border-radius: 10px; /* Optional: add rounded corners */
+    }
 
     .close-btn {
       position: absolute;
@@ -256,17 +254,33 @@
 
     @media screen and (max-width: 768px) {
       nav {
-        flex-direction: column;
-        align-items: center;
+        flex-direction: row;
+        justify-content: space-between;
       }
 
       #menu-icon {
         display: block;
       }
 
-      #search-bar {
-        margin-right: 0;
-        margin-top: 10px;
+      #logo {
+        order: 2;
+        flex-grow: 1;
+        text-align: center;
+      }
+
+      nav a:nth-child(1) {
+        order: 1;
+        margin-right: auto;
+      }
+
+      nav a:nth-child(3) {
+        order: 3;
+        margin-left: auto;
+      }
+
+      #bottom-nav {
+        flex-direction: column;
+        align-items: center;
       }
 
       #menu-items {
@@ -366,9 +380,8 @@
   <nav>
     <a href="#" id="menu-icon"><img src="menu.png" onclick="toggleMenu()" width=20 height=20></a>
     <span id="logo">
-
       <a href="index.html">
-      <img src="logo.png" width="100px">
+        <img src="logo.png" width="100px">
       </a>
     </span>
     <a href="contact.html"><img src="contact.png" alt="Contact" width="25" height="20"></a>
