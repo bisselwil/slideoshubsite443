@@ -70,9 +70,10 @@
       cursor: pointer;
       color: #aaa;
     }
+
     .side-nav a {
-  text-decoration: none; /* Ensure all links in side menu have no underline */
-}
+      text-decoration: none; /* Ensure all links in side menu have no underline */
+    }
 
     .menu-btn {
       padding: 10px 15px;
@@ -122,7 +123,7 @@
     }
 
     .faq-container {
-      width: 60%;
+      width: 90%;
       margin: 20px auto;
     }
 
@@ -134,6 +135,7 @@
       cursor: pointer;
       position: relative;
       transition: background-color 0.3s ease;
+      font-size: 1rem; /* Adjusted font size for readability on mobile */
     }
 
     .faq-question:hover {
@@ -149,6 +151,7 @@
       padding: 10px;
       border-top: 1px solid #ddd;
       background-color: #f9f9f9;
+      font-size: 0.9rem; /* Adjusted font size for readability on mobile */
     }
 
     .modal {
@@ -169,6 +172,8 @@
       background-color: #fefefe;
       padding: 20px;
       border: 1px solid #888;
+      width: 90%; /* Adjusted width for mobile */
+      max-width: 400px;
     }
 
     .close {
@@ -191,6 +196,7 @@
       cursor: pointer;
       transition: all 0.3s ease-in-out;
       margin-top: 10px;
+      width: 100%; /* Full-width button for mobile */
     }
 
     .modal-content button:hover {
@@ -208,6 +214,26 @@
       padding: 10px;
       border-top: 1px solid #ddd;
     }
+
+    @media screen and (max-width: 768px) {
+      .faq-container {
+        width: 95%;
+        font-size: 0.9rem;
+      }
+      
+      .faq-question {
+        padding: 15px;
+        font-size: 0.95rem;
+      }
+      
+      .faq-answer {
+        font-size: 0.85rem;
+      }
+      
+      .modal-content {
+        padding: 15px;
+      }
+    }
   </style>
 </head>
 
@@ -217,7 +243,7 @@
     <span id="logo">
       <a href="index.html">
         <img src="logo.png" width="100px">
-        </a>
+      </a>
     </span>
     <a href="contact.html"><img src="contact.png" alt="Contact" width="25" height="20"></a>
   </nav>
@@ -229,9 +255,6 @@
     </a>
     <a href="browse.html">
       <button class="menu-btn">Browse OSes</button>
-    </a>
-    <a href="faq.html">
-      <button class="menu-btn">FAQ</button>
     </a>
     <a href="contact.html">
       <button class="menu-btn">Contact/Get Featured</button>
@@ -251,8 +274,8 @@
       <strong>Who owns this site?</strong>
     </div>
 
-    <div class="faq-question" onclick="showAnswer('How do I get my own site on this domain (yourosname.slideoshub.com)?', `When you request to have your OS listed on Slide OS Hub, you automatically receive a subdomain (yourosname.slideoshub.com) dedicated to your OS if requested.`)">
-      <strong>How do I get my own site on this domain (yourosname.slideoshub.com)?</strong>
+    <div class="faq-question" onclick="showAnswer('How do I get my own site on this domain?', `When you request to have your OS listed on Slide OS Hub, you automatically receive a subdomain (yourosname.slideoshub.com) dedicated to your OS if requested.`)">
+      <strong>How do I get my own site on this domain?</strong>
     </div>
   </div>
 
@@ -279,15 +302,7 @@
       var menu = document.getElementById("sideMenu");
       menu.style.width = '0';
     }
-  // Close the menu if clicking outside of it
-  document.addEventListener('click', function(event) {
-    var menu = document.getElementById("sideMenu");
-    var menuIcon = document.getElementById("menu-icon");
 
-    if (!menu.contains(event.target) && !menuIcon.contains(event.target)) {
-      closeMenu();
-    }
-  });
     function closeAnswerModal() {
       var modal = document.getElementById('answerModal');
       modal.style.display = 'none';
